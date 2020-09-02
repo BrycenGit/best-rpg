@@ -1,0 +1,54 @@
+cyberpunk 20202
+
+class game
+
+this.players[]
+this.playersId
+
+select player functions
+delete player function
+
+class character 
+  constructor(name, class,)
+  this.name
+  this.class
+  this.base-health (20)
+  this.level (level up = plus base health plus base attack)
+  this.armor (equiped = plus base health)
+  this.base-attack (-5) 
+  this.weapon
+  this.inventory [( potion to add to health)]
+
+
+  functions
+
+attack function
+id +1.base health += attack
+when base health <=0 alert this.id loses
+other id wins
+
+level up  parameter function
+if win = true llevelup();
+
+
+levelup();
+basehealth += 5
+base attack += 2
+
+armorequip();
+if(armor = true) {
+base.health +=5
+}
+
+weaponequip():
+if (weapon = true) {
+  baseattack +2
+}
+
+potion();
+on click
+base health +=4
+
+
+class Enemy extends Character
+  this.name
