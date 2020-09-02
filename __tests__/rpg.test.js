@@ -17,8 +17,8 @@ describe('Game', () => {
     expect(game.characters).toHaveLength(2);
   })
   test('will assign increase current id', () => {
-    game.assignId(brycen);
-    game.assignId(michael);
+    game.assignId();
+    game.assignId();
     expect(game.currentId).toEqual(2);
   })  
 });
@@ -35,13 +35,13 @@ describe('Character', () => {
     let ultimateWeapon = 50;
 
     beforeEach(() => {
-      character = new Character(brycen, bane);
-      character2 = new Character(michael, bane)
+      character = new Character("brycen", "bane", true);
+      character2 = new Character("michael", "bane", false)
     })
 
   test('should create a character', () => {
-    expect(character.name).toBe(brycen);
-    expect(character.playerClass).toBe(bane);
+    expect(character.name).toBe('brycen');
+    expect(character.playerClass).toBe('bane');
     expect(character.health).toEqual(20);
     expect(character.level).toEqual(1);
     expect(character.armor).toStrictEqual(false);
@@ -49,8 +49,11 @@ describe('Character', () => {
     expect(character.weapon).toStrictEqual(false);
     expect(character.inventory).toHaveLength(0);
   });
-  test('should subtract 5 from health', () => {
+  test('attack should subtract 5 from health', () => {
     character.attackMove(character2);
+    character.equipArmor(dragonArmor);
+    character2.equipWeapon(ultimateWeapon);
+    console.log(character2.attack)
     expect(character2.health).toEqual(15);
   })
   test('should add potion value to health', () => {
@@ -68,9 +71,13 @@ describe('Character', () => {
     expect(character.weapon).toStrictEqual(true);
   })
   test("should add health, attack, and level", () => {
-   character.levelUp();
-   expect(character.health).toEqual(25);
-   expect(character.attack).toEqual(6);
-   expect(character.level).toEqual(2); 
+    character.levelUp();
+    expect(character.health).toEqual(25);
+    expect(character.attack).toEqual(6);
+    expect(character.level).toEqual(2); 
+  })
+  test('should add 6 to character.health', () => {
+    character.heal();
+    expect(character.health).toEqual(26);
   })
 });
