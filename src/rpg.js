@@ -3,6 +3,10 @@ export function Game() {
   this.currentId = 0;
 }
 
+Game.prototype.addCharacter = function(character) {
+  this.characters.push(character)
+}
+
 
 
 export function Character(name, playerClass) {
@@ -15,5 +19,7 @@ export function Character(name, playerClass) {
   this.weapon = false;
   this.inventory = [];
 }
+
+
 
 

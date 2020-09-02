@@ -1,17 +1,32 @@
 import { Game, Character } from './../src/rpg.js';
 
 describe('Game', () => {
+  let game;
+  let brycen;
+  let michael;
+  beforeEach(() => {
+    game = new Game();
+  })
+
   test('should create a game with with 0 players', () => {
-    const game = new Game();
     expect(game.currentId).toEqual(0);
-  });  
+  });
+  test('will add character to characters array', () => {
+    game.addCharacter(brycen);
+    game.addCharacter(michael);
+    expect(game.characters).toHaveLength(2);
+  })  
 });
 
 describe('Character', () => {
-  test('should create a character', () => {
     let brycen;
     let bane;
-    const character = new Character(brycen, bane);
+    let character;
+    beforeEach(() => {
+      character = new Character(brycen, bane);
+    })
+
+  test('should create a character', () => {
     expect(character.name).toBe(brycen);
     expect(character.playerClass).toBe(bane);
     expect(character.health).toEqual(20);
