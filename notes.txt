@@ -28,7 +28,7 @@ when base health <=0 alert this.id loses
 other id wins
 
 level up  parameter function
-if win = true llevelup();
+if win = true levelup();
 
 
 levelup();

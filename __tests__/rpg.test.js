@@ -2,8 +2,8 @@ import { Game, Character } from './../src/rpg.js';
 
 describe('Game', () => {
   let game;
-  let brycen =  ('brycen') ;
-  let michael =  ('michael') ;
+  let brycen =  {name:'brycen'} ;
+  let michael =  {name:'michael'} ;
 
   beforeEach(() => {
     game = new Game();
@@ -15,6 +15,9 @@ describe('Game', () => {
     game.addCharacter(brycen);
     game.addCharacter(michael);
     expect(game.characters).toHaveLength(2);
+    console.log(brycen);
+    console.log(michael);
+
   })
   test('will assign increase current id', () => {
     game.assignId();
@@ -23,11 +26,7 @@ describe('Game', () => {
   })  
 });
 
-
 describe('Character', () => {
-    let michael;
-    let brycen;
-    let bane;
     let character;
     let character2;
     let UltraPotion = 15;
@@ -79,5 +78,8 @@ describe('Character', () => {
   test('should add 6 to character.health', () => {
     character.heal();
     expect(character.health).toEqual(26);
+  })
+  test("should minus 1-6 health", () => {
+    
   })
 });

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>RPG</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>cYBER qUEST 2020</h1>
+      <form id="user">
+        <div class="form-group">
+          <label name='user-name'>Name:</label>
+          <input id='name' class="form-control" type="text" required>
+        </div>
+        <div class="form-group">
+          <label name='class'>Class:</label><br>
+          <input type="radio" id="robot" name="class" value="robot" required>
+          <label for="robot">Robot</label><br>
+          <input type="radio" id="punk" name="class" value="punk">
+          <label for="punk">Punk</label><br>
+          <input type="radio" id="unspoken" name="class" value="unspoken">
+          <label for="unspoken">Unspoken</label><br>
+        </div>
+        <button type="submit" class="btn btn-success">Choose!</button>
+      </form><br>
+      <div class="row" name='battle-area'>
+        <div class="col-md-6">
+          <h2>Player 1: <span id="player-1-name"></span></h2>
+            <p>Health: <span class="health-1"></span>
+            <p>Attack: <span class='attack-1'></span>
+            <div class='row' id='player-1-buttons'> 
+              <div class='col-md-6'>
+                <button type='button' class='btn btn-danger' id='attack-1'>ATTACK!</button>
+              </div>
+              <div class='col-md-6'>
+                <button type='button' class='btn btn-primary' id='attack-1'>HEAL!</button>
+              </div>
+            </div>  
+        </div>
+        <div class="col-md-6">
+          <h2>Player 2: <span id="player-2-name"></span></h2>
+            <p>Health: <span class="health-2"></span>
+            <p>Attack: <span class='attack-2'></span>
+            <div class='row' id='player-2-buttons'> 
+              <div class='col-md-6'>
+                <button type='button' class='btn btn-danger' id='attack-2'>ATTACK!</button>
+              </div>
+              <div class='col-md-6'>
+                <button type='button' class='btn btn-primary' id='attack-2'>HEAL!</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

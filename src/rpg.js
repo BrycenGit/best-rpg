@@ -1,89 +1,96 @@
-export function Game() {
-  this.characters = [];
-  this.currentId = 0;
-}
 
-Game.prototype.addCharacter = function(character) {
-  this.characters.push(character);
-  // character.id = this.assignId();
-}
-
-Game.prototype.assignId = function() {
-  this.currentId += 1;
-  return this.currentId;
-}
-
-// Game.prototype.findCharacter = function(i) {
-//   for (let i=0; i< this.characters.length; i++) {
-//     if (this.characters[i].playerTurn === true) {
-//       return i
-    
-      
-//     }
-//   }
-// }
-
-
-// Game.prototype.nextTurn = function() {
-//   let i = this.findCharacter();
-//   if( i===0 ) {
-//     this.characters[0].playerTurn = false
-//     this.characters[1].playerTurn = true
-//   } else {
-//     this.characters[1].playerTurn = false
-//     this.characters[0].playerTurn = true
-//   }
-// }
-
-export function Character(name, playerClass, type, booleanParameter) {
-  this.name = name;
-  this.playerClass = playerClass; 
-  this.health = 20;
-  this.level = 1;
-  this.armor = false;
-  this.attack = 5;
-  this.weapon = false;
-  this.inventory = [];
-  this.type = type;
-  this.playerTurn = booleanParameter
-  this.id;
+export class Game {
+  constructor() {
+    this.characters = [];
+    this.currentId = 0;
+    this.CharactersIndex = 0;
   }
-
-Character.prototype.attackMove = function(attackedPlayer) {
-  attackedPlayer.health -= this.attack;
-  // attackedPlayer.attack -= this.health;
-  return;
-} 
-
-
-
-Character.prototype.usePotion = function(potionType) {
-  this.health += potionType;
-  return;
-}
-
-Character.prototype.equipArmor = function(armorType) {
-  this.armor = true;
-  this.health += armorType;
-  return;
-}
-
-Character.prototype.equipWeapon = function(weaponType) {
-  this.weapon = true;
-  this.attack += weaponType;
-  return;
-}
-
-Character.prototype.levelUp = function() {
-  this.level += 1;
-  this.health += 5;
-  this.attack += 1;
-  return;
-}
-
-Character.prototype.heal = function() {
-  this.health += 6
-  return;
+  assignId() {
+    this.currentId += 1;
+    return this.currentId;
+  }
+  addCharacter(player) {
+    player.id = this.assignId();
+    this.characters.push(player);
+  }
+  nextCharacter() {
+    if (this.CharactersIndex + 1 < this.characters.length) {
+      this.CharactersIndex++;
+    } else {
+      this.CharactersIndex = 0;
+    }
+  }
 }
 
 
+export class Character {
+  constructor(name, playerClass, type, booleanParameter) {
+    this.name = name;
+    this.playerClass = playerClass; 
+    this.health = 20;
+    this.currentHealth = 20;
+    this.level = 1;
+    this.armor = false;
+    this.attack = 5;
+    this.weapon = false;
+    this.exp = 0;
+    this.inventory = [];
+    this.type = type;
+    this.playerTurn = booleanParameter;
+    this.id;
+  }
+  attackMove(attackedPlayer) {
+    attackedPlayer.health -= this.attack;
+    // attackedPlayer.attack -= this.health;
+    return;
+  }
+  usePotion(potionType) {
+    this.health += potionType;
+    return;
+  }
+  equipArmor(armorType) {
+    this.armor = true;
+    this.health += armorType;
+    return;
+  }
+  equipWeapon(weaponType) {
+    this.weapon = true;
+    this.attack += weaponType;
+    return;
+  }
+  levelUp() {
+    this.level += 1;
+    this.health += 5;
+    this.attack += 1;
+    return;
+  }
+  heal() {
+    this.health += 6;
+    return;
+  }
+}
+
+
+export function Battle (player1, player2  enemy) {
+  this.combatants = [player1, player2, enemy];
+}
+
+Battle.prototype.attack = function(attacker){
+  let damage;
+  if (attacker.type === "player"){
+    damage = attacker.attack + Math.floor(Math.random()*(6-1+1)) +1;
+    this.combatants[1].currentHealth -= damage;
+  } else if (attacker.type === "enemy") {
+    damage = attacker.attack + Math.floor(Math.random()*(3-1+1)) +1;
+    this.combatants[0].currentHealth -= damage; 
+  }
+  return damage;
+};
+
+Battle.prototype.isCharacterAlive = function(attackedPlayer){
+  if (attackedPlayer.currentHealth <= 0) { 
+    return false;
+  } else {
+    return true;
+  }
+};
