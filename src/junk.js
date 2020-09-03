@@ -37,7 +37,7 @@
 function Character(name, playerClass, type, booleanParameter) {
   this.name = name;
   this.playerClass = playerClass; 
-  this.health = 20;
+  this.health = health;
   this.level = 1;
   this.armor = false;
   this.attack = 5;

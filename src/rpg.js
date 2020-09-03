@@ -20,31 +20,48 @@ export class Game {
       this.CharactersIndex = 0;
     }
   }
-  gameAttack(character) {
-    let damage;
-    if (character.type === "player"){
-      damage = character.attack + Math.floor(Math.random()*(6-1+1)) +1;
-      this.characters[1].currentHealth -= damage;
-    } else if (character.type === "enemy") {
-      damage = character.attack + Math.floor(Math.random()*(3-1+1)) +1;
-      this.characters[0].currentHealth -= damage; 
+  // gameAttack(character) {
+  //   let damage;
+  //   if (character.type === "player"){
+  //     damage = character.attack + Math.floor(Math.random()*(6-1+1)) +1;
+  //     this.characters[1].currentHealth -= damage;
+  //   } else if (character.type === "enemy") {
+  //     damage = character.attack + Math.floor(Math.random()*(3-1+1)) +1;
+  //     this.characters[0].currentHealth -= damage; 
+  //   }
+  //   return damage;
+  // }
+
+  newAttackMove(victimIndex, attackerIndex) {
+    let damage = 5;
+    this.characters[victimIndex].health -= (this.characters[attackerIndex].attack + damage);
+    this.isCharacterAlive(victimIndex);
+
+  }
+  
+  isCharacterAlive(i) {
+    if (this.characters[i].health <= 0) { 
+      alert('gameover for ' + this.characters[i].name);
+      return false;
+    } else {
+      return true;
     }
-    return damage;
   }
 
-  newAttackMove(i) {
-    let damage = 5;
-    this.characters[i].health -= damage;
+  useHeal(i) {
+    let heal = 6;
+    this.characters[i].health += heal;
   }
+  
+  
 }
 
 
 export class Character {
-  constructor(name, playerClass, type, booleanParameter) {
+  constructor(name, playerClass, type,) {
     this.name = name;
-    this.playerClass = playerClass; 
+    this.playerClass = playerClass;
     this.health = 20;
-    this.currentHealth = 20;
     this.level = 1;
     this.armor = false;
     this.attack = 5;
@@ -52,9 +69,27 @@ export class Character {
     this.exp = 0;
     this.inventory = [];
     this.type = type;
-    this.playerTurn = booleanParameter;
     this.id;
+    this.classAttributes(); 
   }
+
+  classAttributes() {
+    if (this.playerClass === 'robot') {
+      this.health = 30;
+      this.attack +=5;
+      alert('roboto you are');
+    } else if (this.playerClass === 'punk') {
+      this.health = 15;
+      this.attack +=10;
+      alert('you punk');
+    } else {
+      this.health = 10;
+      this.attack +=20;
+      alert('unspoken');
+    }
+    
+  }
+
   attackMove(attackedPlayer) {
     attackedPlayer.health -= this.attack;
     // attackedPlayer.attack -= this.health;
@@ -104,13 +139,13 @@ Battle.prototype.attack = function(attacker){
   return damage;
 };
 
-Battle.prototype.isCharacterAlive = function(attackedPlayer){
-  if (attackedPlayer.currentHealth <= 0) { 
-    return false;
-  } else {
-    return true;
-  }
-};
+// Battle.prototype.isCharacterAlive = function(attackedPlayer){
+//   if (attackedPlayer.currentHealth <= 0) { 
+//     return false;
+//   } else {
+//     return true;
+//   }
+// };
 
 
 // function of attack(){
