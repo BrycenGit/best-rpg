@@ -20,6 +20,22 @@ export class Game {
       this.CharactersIndex = 0;
     }
   }
+  gameAttack(character) {
+    let damage;
+    if (character.type === "player"){
+      damage = character.attack + Math.floor(Math.random()*(6-1+1)) +1;
+      this.characters[1].currentHealth -= damage;
+    } else if (character.type === "enemy") {
+      damage = character.attack + Math.floor(Math.random()*(3-1+1)) +1;
+      this.characters[0].currentHealth -= damage; 
+    }
+    return damage;
+  }
+
+  newAttackMove(i) {
+    let damage = 5;
+    this.characters[i].health -= damage;
+  }
 }
 
 
@@ -71,12 +87,13 @@ export class Character {
 }
 
 
-export function Battle (player1, player2  enemy) {
-  this.combatants = [player1, player2, enemy];
+export function Battle (player1, enemy) {
+  this.combatants = [player1, enemy];
 }
 
 Battle.prototype.attack = function(attacker){
   let damage;
+
   if (attacker.type === "player"){
     damage = attacker.attack + Math.floor(Math.random()*(6-1+1)) +1;
     this.combatants[1].currentHealth -= damage;
@@ -94,3 +111,19 @@ Battle.prototype.isCharacterAlive = function(attackedPlayer){
     return true;
   }
 };
+
+
+// function of attack(){
+
+//   let damage = randomber
+//   enemy.health -= damage
+//   ischaracteralive() {
+//     enemyDamage = randomber
+//     if(enemy.health<= 0) {
+//       alert("player wins!")
+//     } else {
+//       player.health -= enemyDamge
+//     }
+//   }
+// }  
+
