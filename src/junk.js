@@ -80,3 +80,14 @@ Character.prototype.heal = function() {
   return;
 };
   
+  // gameAttack(character) {
+  //   let damage;
+  //   if (character.type === "player"){
+  //     damage = character.attack + Math.floor(Math.random()*(6-1+1)) +1;
+  //     this.characters[1].currentHealth -= damage;
+  //   } else if (character.type === "enemy") {
+  //     damage = character.attack + Math.floor(Math.random()*(3-1+1)) +1;
+  //     this.characters[0].currentHealth -= damage; 
+  //   }
+  //   return damage;
+  // }
